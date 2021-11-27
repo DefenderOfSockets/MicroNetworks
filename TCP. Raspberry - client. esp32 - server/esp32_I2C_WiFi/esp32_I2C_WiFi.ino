@@ -101,20 +101,23 @@ void loop() {
         Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
         Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
     #endif
+        
+        str_packet = (String)0x00;
+        str_packet += ",";
+        str_packet += (String)ax;
+        str_packet += ",";
+        str_packet += (String)ay;
+        str_packet += ",";
+        str_packet += (String)az;
+        str_packet += ",";
+        str_packet += (String)gx;
+        str_packet += ",";
+        str_packet += (String)gy;
+        str_packet += ",";
+        str_packet += (String)gz;
 
-    
-        client.print("A");// print it out the serial monitor
-        client.print(ax);
-        client.print("F");
-        client.print(ay);
-        client.print("F");
-        client.print(az);
-        client.print("F");
-        client.print(gx);
-        client.print("F");
-        client.print(gy);
-        client.print("F");
-        client.print(gz);
+        client.println(str_packet);
+        Serial.println(str_packet);
       }
     }
     // Close the connection
